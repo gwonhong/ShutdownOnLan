@@ -7,32 +7,31 @@
 ## Files
 
 - `src/server.c`: The C source code of the server.
-- `scripts/run_silently.bat`: The batch script to run the executable silently.
+- `scripts/run_silently.bat`: The batch script to run the executable silently. This script assumes the executable located at `../bin/`. You can modify it on your own.
 
 ## Usage
 
-1. **Download the executable:**
+1. **Download the bundle:**
 
-   Download the latest version of the executable from the [Releases](https://github.com/gwonhong/shutdown-on-3-wol/releases) tab.
+   Download the latest version of the bundle (ZIP file) from the [Releases](https://github.com/gwonhong/shutdown-on-3-wol/releases) tab.
 
-2. **Register the script with Windows Task Scheduler to run on startup:**
+2. **Extract the bundle:**
+
+   Extract the ZIP file. It contains `server.exe` and `run_silently.bat`. Make sure they are in the same folder. If you need to separate them, you need to edit the `run_silently.bat` to indicate the `server.exe` properly.
+
+3. **Register the script with Windows Task Scheduler to run on startup:**
 
    - Open Task Scheduler and create a new task.
-   - In the "General" tab, provide a name for the task and check "Run with highest privileges."
+   - **In the "General" tab, provide a name for the task and check "Run with the highest privileges."** This server needs administrative privileges.
    - In the "Triggers" tab, create a new trigger and set it to begin the task "At startup."
    - In the "Actions" tab, create a new action to start a program and browse to select `run_silently.bat` in the `scripts` directory.
    - In the "Conditions" tab, uncheck "Start the task only if the computer is on AC power" if you want it to run on battery as well.
    - In the "Settings" tab, ensure "Allow task to be run on demand" is checked.
 
-3. **Ensure the task runs with administrative privileges:**
-
-   - Right-click on the task in Task Scheduler and select "Properties."
-   - Under the "General" tab, ensure "Run with highest privileges" is checked.
-
 4. **Send magic packets to trigger shutdown:**
 
-   - Use any tool that can send a magic packet to your PC's MAC address on port 9.
-   - Send the magic packet three times in a row within a 3-second interval to shut down your PC.
+   - Use any tool that can send a magic packet to your PC's MAC address on **port 9**.
+   - Send the magic packet **three times in a row within a 3-second interval** to shut down your PC.
 
 ## My Use Case
 
